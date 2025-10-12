@@ -1,9 +1,9 @@
-# Lesson 3 Variables, operators, decision tries
+# Lesson 5 - Functions. Modules
 
 In order to use this config you have to install the following NPM packages
 ```
 npm init
-npm i -D @eslint/js eslint globals eslint-plugin-unicorn
+npm i -D @eslint/js eslint globals eslint-plugin-unicorn @stylistic/eslint-plugin prettier
 ```
 
 Then put eslint.config.mjs and .prettierrc into your base directory
