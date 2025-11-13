@@ -1,0 +1,520 @@
+{
+	"info": {
+		"_postman_id": "ea36fc8a-12f0-4075-bab7-639b3e69f607",
+		"name": "Joke API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48394074"
+	},
+	"item": [
+		{
+			"name": "Get Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has joke structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('id');\r",
+							"    pm.expect(response).to.have.property('type');\r",
+							"    pm.expect(response).to.have.property('setup');\r",
+							"    pm.expect(response).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Punchline is not empty\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.punchline).to.not.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/random",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ten Jokes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an array\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has exactly 10 jokes\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Each joke has correct structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    response.forEach(joke => {\r",
+							"        pm.expect(joke).to.have.property('id');\r",
+							"        pm.expect(joke).to.have.property('type');\r",
+							"        pm.expect(joke).to.have.property('setup');\r",
+							"        pm.expect(joke).to.have.property('punchline');\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/ten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Joke by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has joke structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('id');\r",
+							"    pm.expect(response).to.have.property('type');\r",
+							"    pm.expect(response).to.have.property('setup');\r",
+							"    pm.expect(response).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct ID\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.id).to.equal(1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Programming Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is array with one joke\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"    pm.expect(response).to.have.lengthOf(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke).to.have.property('id');\r",
+							"    pm.expect(joke).to.have.property('type');\r",
+							"    pm.expect(joke).to.have.property('setup');\r",
+							"    pm.expect(joke).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke type is programming\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke.type).to.equal('programming');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/programming/random",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"programming",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get General Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is array with one joke\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"    pm.expect(response).to.have.lengthOf(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke).to.have.property('id');\r",
+							"    pm.expect(joke).to.have.property('type');\r",
+							"    pm.expect(joke).to.have.property('setup');\r",
+							"    pm.expect(joke).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke type is general\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke.type).to.equal('general');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/general/random",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"general",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Knock-Knock Random Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is array with one joke\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"    pm.expect(response).to.have.lengthOf(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke).to.have.property('id');\r",
+							"    pm.expect(joke).to.have.property('type');\r",
+							"    pm.expect(joke).to.have.property('setup');\r",
+							"    pm.expect(joke).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke type is knock-knock\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke.type).to.equal('knock-knock');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/knock-knock/random",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"knock-knock",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Joke by Different ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has joke structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('id');\r",
+							"    pm.expect(response).to.have.property('type');\r",
+							"    pm.expect(response).to.have.property('setup');\r",
+							"    pm.expect(response).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct ID\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.id).to.equal(2);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Non-existent Joke",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Error message in response\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('message');\r",
+							"    pm.expect(response.message).to.include('not found');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/9999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Another Programming Random",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is array with one joke\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.be.an('array');\r",
+							"    pm.expect(response).to.have.lengthOf(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke type is programming\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke.type).to.equal('programming');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has unique ID\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    const joke = response[0];\r",
+							"    pm.expect(joke.id).to.be.a('number');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/programming/random",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"programming",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Joke by Another ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has joke structure\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response).to.have.property('id');\r",
+							"    pm.expect(response).to.have.property('type');\r",
+							"    pm.expect(response).to.have.property('setup');\r",
+							"    pm.expect(response).to.have.property('punchline');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has correct ID\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.id).to.equal(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Joke has non-empty setup\", function () {\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.setup).to.not.be.empty;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3005/jokes/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3005",
+					"path": [
+						"jokes",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
