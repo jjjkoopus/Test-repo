@@ -16,6 +16,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Debug repo root
+        run: ls -la
+
+      - name: Debug playwright folder
+        run: ls -la playwright-tests
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
