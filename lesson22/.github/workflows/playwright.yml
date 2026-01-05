@@ -4,11 +4,11 @@ on:
   push:
     branches: [ "main", "master", "lesson22" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "lesson22" ]
   workflow_dispatch:
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -28,10 +28,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run tests
+      - name: Run Playwright tests
         run: npx playwright test
 
-      - name: Upload report
+      - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
         with:
