@@ -1,0 +1,11 @@
+{
+  "name": "ui-tests",
+  "private": true,
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "test": "playwright test"
+  }
+}
