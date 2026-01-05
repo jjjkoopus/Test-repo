@@ -12,7 +12,7 @@
     "types": ["node", "@playwright/test"]
   },
   "include": [
-    "pages/**/*",
+    "playwright-tests/pages/**/*",
     "tests/**/*"
   ],
   "exclude": [
