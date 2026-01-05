@@ -2,9 +2,11 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ "main", "master", "lesson22" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main", "master", "lesson22" ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -13,27 +15,29 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
           cache-dependency-path: playwright-tests/package-lock.json
 
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
         working-directory: playwright-tests
 
-      - name: Install Playwright browsers
+      - name: Install browsers
         run: npx playwright install --with-deps
         working-directory: playwright-tests
 
-      - name: Run Playwright tests
+      - name: Run tests
         run: npx playwright test
         working-directory: playwright-tests
 
-      - name: Upload Playwright report
+      - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
