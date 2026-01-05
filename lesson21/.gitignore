@@ -1,0 +1,11 @@
+node_modules/
+reports/
+.DS_Store
+*.log
+.env
+coverage/
+.nyc_output
+*.tmp
+*.cache
+test-results/
+playwright-report/
