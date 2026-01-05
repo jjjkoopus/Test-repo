@@ -1,23 +1,44 @@
-name: Playwright Debug
+name: Playwright Tests
 
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  debug:
+  tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show current directory
-        run: pwd
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: List repo root
-        run: ls -la
+      - name: Install dependencies
+        working-directory: lesson22/playwright-tests
+        run: npm install
 
-      - name: Find playwright config and package.json
-        run: find . -maxdepth 5 -type f \( -name "playwright.config.ts" -o -name "package.json" \)
+      - name: Install Playwright browsers
+        working-directory: lesson22/playwright-tests
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        working-directory: lesson22/playwright-tests
+        run: npx playwright test --config=playwright.config.ts
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            lesson22/playwright-tests/playwright-report
+            lesson22/playwright-tests/test-results
