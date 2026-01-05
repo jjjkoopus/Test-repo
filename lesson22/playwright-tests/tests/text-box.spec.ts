@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { DemoQAPage } from '../playwright-tests/pages/DemoQAPage';
+import { DemoQAPage } from '../pages/DemoQAPage';
 
 test.describe('DemoQA Text Box Tests', () => {
   let demoQAPage: DemoQAPage;
@@ -16,9 +16,9 @@ test.describe('DemoQA Text Box Tests', () => {
       'Current Address 123',
       'Permanent Address 456'
     );
-    
+
     await demoQAPage.submitForm();
-    
+
     await expect(page.locator('#output')).toBeVisible();
     await expect(page.locator('#name')).toContainText('John Doe');
   });

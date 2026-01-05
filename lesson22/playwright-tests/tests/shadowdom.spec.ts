@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { DemoQAPage } from '../playwright-tests/pages/DemoQAPage';
+import { DemoQAPage } from '../pages/DemoQAPage';
 
 test.describe('DemoQA Shadow DOM Tests', () => {
   let demoQAPage: DemoQAPage;
